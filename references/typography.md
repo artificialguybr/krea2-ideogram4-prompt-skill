@@ -2,37 +2,40 @@
 
 ## 1. Regras universais
 
-1. **Aspas duplas sempre**: "OPEN LATE", "Café Central".
-2. **Cedo no prompt** — os dois modelos pesam mais o início. No Ideogram, o melhor lugar é a seção do sujeito principal.
-3. **1–4 palavras renderizam mais limpo**; frases longas erram letra com frequência.
-4. **Maiúsculas** tendem a render melhor que sentence case para display; sentence case funciona bem em corpo de texto curto (pôster, packaging).
-5. Uma instância de texto por elemento; cada texto tem sua região/elemento próprio (no Ideogram: um objeto de `text` por elemento, com bbox).
-6. Diga onde o texto mora: "arched over the door", "stamped across the chest", "small caption at the bottom".
-7. Combine com material: "embossed in brass", "printed in cracked screenprint ink", "neon tubing".
+1. **String literal exata** no campo `text` do JSON (as aspas envolvem o valor; não vão dentro). Em NL, aspas duplas + cedo no prompt.
+2. **1–4 palavras renderizam mais limpo**; frases longas erram letra.
+3. **Case**: maiúsculas render melhor para display; sentence case para corpo curto. **Atenção: Expand/Magic Prompt ligado pode alterar o case** — desligue quando o casing importar (Ideogram 4.5; app).
+4. Um texto por elemento (`type: "text"` próprio com bbox/desc/paleta).
+5. Diga onde o texto mora: "arched over the door", "stamped across the chest".
+6. Material do texto: "embossed in brass", "neon tubing", "chalk on blackboard".
+7. Para layouts limpos, feche com **"No other text."**
 
 ## 2. Krea 2
 
-- Aspas duplas + contexto físico do texto (placa, camiseta, letreiro neon).
-- Se errar: re-rolar; encurtar o texto; trocar o material descrito. Não tente "corrigir letra por letra" no prompt — regenere.
+- Aspas duplas + contexto físico (placa, camiseta, letreiro).
+- Errou? Re-roll; encurte; troque o material. Não corrija letra a letra.
 
-## 3. Ideogram 4
+## 3. Ideogram 4.x — o melhor da categoria, mas verifique
 
-- Melhor modelo da categoria para texto, mas **não é perfeito**: se a exatidão for obrigatória (print, branding), gere o fundo e coloque o texto real no Figma/Photoshop.
-- No JSON: `text` com a string exata entre aspas + `bbox` + `art_style` (mesmo que "pareça foto de um pôster" — print/graphic = art_style).
-- Muitos elementos de texto: um `elements[]` por texto, com suas paletas.
-- Após gerar: leia a imagem em 100% e compare caractere a caractere; trate como rascunho até aprovação.
+- 4.5 com Expand Prompt OFF: **31/31 linhas de texto corretas em 7 gerações de teste** (preços, travessões, apóstrofos) — mas typeface é seguido "mais solto" e deriva entre tiers: **tranque o tier** antes de refinar lettering.
+- 4.5 corrige texto garbled em imagens antigas via edição (Precise Edit + mask sobre o bloco).
+- Ainda assim: para print/branding exato, gere o fundo e coloque o texto real no Figma/PS.
+- Após gerar: leia em 100% e compare caractere a caractere; trate como rascunho até aprovação.
 
 ## 4. Logotipo / wordmark
 
-- Peça como objeto físico quando quiser realismo: "brass sign with the word \"CENTRAL\" in art deco lettering".
-- Para wordmark flat: estilo explícito de lettering ("custom hand-lettered wordmark, swashes") + paleta em hex.
-- Gere 4 variantes mudando UM parâmetro (lettering, paleta, material) por rodada.
+- Realismo: "brass sign with the word \"CENTRAL\" in art deco lettering".
+- Flat: estilo de lettering explícito ("custom hand-lettered wordmark, swashes") + paleta hex.
+- 4 variantes mudando UM parâmetro (lettering, paleta, material) por rodada.
 
 ## 5. Falhas comuns e correções
 
 | Falha | Correção |
 |---|---|
-| Letra trocada | Encurtar para ≤4 palavras; aspas; mover para início; regen |
+| Case trocado | Expand/Magic Prompt OFF; reescreva no case desejado |
+| Letra trocada | ≤4 palavras; aspas; início do prompt; regen |
 | Texto borrado | Material mais definido ("die-cut vinyl", "engraved") |
-| Texto em língua errada | Especificar idioma: "in Portuguese: \"…\"" |
-| Múltiplos textos derretem | Separar em elementos/regiões distintos |
+| Língua errada | "in Portuguese: \"…\"" |
+| Textos derretem juntos | Um elemento `text` por texto, com bbox |
+| Traços do texto antigo sobem após troca | Mask cobrindo o bloco antigo INTEIRO + margem (4.5 High) |
+| Typeface não bate | Descreva de novo no mesmo tier; usar mask no bloco |

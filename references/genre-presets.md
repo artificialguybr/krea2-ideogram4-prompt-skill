@@ -5,7 +5,7 @@ Preencha os `<...>`. Remova módulos irrelevantes. Sempre entregue no Output Pro
 ## 1. Fotografia / retrato editorial
 ```
 Editorial 85mm portrait of <subject>, <appearance with textures>, <pose>. Shot on <camera/film> at f/1.8, shallow depth of field, <framing>. <environment with 2–3 depth layers>. <source+direction+quality of light>. <color story via materials>. <mood via mechanism, not adjectives>.
-Settings: Krea 2 Large (hosted) ou RAW; aspect 4:5; creativity baixa-média.
+Settings: Krea 2 Large (hosted) ou RAW; aspect 4:5; sliders: intensity −20, complexity 0, movement −10; creativity baixa-média.
 ```
 
 ## 2. Fashion / try-on
@@ -32,7 +32,7 @@ Settings: Ideogram 4 JSON (controle) ou Krea Medium; aspect 16:10 / 4:3.
 ## 5. 3D / render
 ```
 <subject> as a <matte/glossy/clay> 3D render, <form details>, floating over <studio backdrop>. Soft key light upper left + rim light from behind. Subtle subsurface scattering / bevel highlights. Octane-style path tracing, clean topology read.
-Settings: Krea 2 Medium; creativity média-alta p/ exploração de forma.
+Settings: Krea 2 Medium; sliders: complexity −30 (forma limpa), movement 0; creativity média-alta.
 ```
 
 ## 6. Anime / ilustração
@@ -61,3 +61,10 @@ Settings: Krea 2 Large; aspect 4:5 / 3:2.
 
 ## 10. Variações de família consistente (batch)
 - Trave: seed-like contract = mesmo JSON (Ideogram) ou mesmo bloco [Subject hierarchy]+[Appearance]; varie 1 dimensão (expressão/ângulo/estação). Documente a variável no campo ASSUMPTIONS.
+
+## 11. Notas transversais (v2)
+
+- Sliders Krea (intensity/complexity/movement, −100..100) vão em SUGGESTED SETTINGS para todo preset hosted.
+- Para texto denso (signage, menu, packaging) prefira **Ideogram 4.0/4.5** (também dentro do app Krea) ou Seedream — Krea 2 é o ponto fraco de texto longo.
+- Pôster/print em Ideogram: gerar JSON (§3 do preset) com Expand Prompt OFF na 2ª rodada para travar o copy.
+- Variações de família consistente: no 4.5 use seed + mesmo tier; no 4.0 use o JSON loop.
